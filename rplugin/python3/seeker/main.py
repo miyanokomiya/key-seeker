@@ -1,5 +1,5 @@
 import neovim
-from lib import seeker
+import lib
 
 
 @neovim.plugin
@@ -12,7 +12,7 @@ class KeySeeker(object):
     def key_seeker_clip(self):
         cursor_r = self.get_cursor_pos(self.nvim)[0]
         lines = self.nvim.current.buffer[:cursor_r]
-        key = seeker.seek_key(lines, cursor_r - 1)
+        key = lib.seeker.seek_key(lines, cursor_r - 1)
         self.clip(self.nvim, key)
         self.nvim.out_write('Clipped: ' + key + '\n')
 

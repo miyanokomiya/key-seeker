@@ -1,5 +1,5 @@
 from unittest import TestCase
-from lib import seeker
+from . import seeker
 
 
 class TestJsonModule(TestCase):
