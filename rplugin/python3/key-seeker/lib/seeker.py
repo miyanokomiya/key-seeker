@@ -1,5 +1,5 @@
 def valid_line(line):
-    """ json行バリデーション """
+    """ 行バリデーション """
 
     lstriped = line.lstrip()
     if len(lstriped) == 0:
