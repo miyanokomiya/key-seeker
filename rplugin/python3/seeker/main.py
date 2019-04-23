@@ -21,6 +21,6 @@ class KeySeeker(object):
         return cursor_r, cursor_c
 
     def clip(self, text):
-        self.command('let @0="{}"'.format(text))
-        self.command('let @"="{}"'.format(text))
-        self.command('let @*="{}"'.format(text))
+        self.nvim.command('let @0="{}"'.format(text))
+        self.nvim.command('let @"="{}"'.format(text))
+        self.nvim.command('let @*="{}"'.format(text))
