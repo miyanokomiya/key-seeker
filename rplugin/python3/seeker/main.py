@@ -1,5 +1,5 @@
 import neovim
-import lib
+from seeker.lib import seeker
 
 
 @neovim.plugin
@@ -10,10 +10,10 @@ class KeySeeker(object):
 
     @neovim.command("KeySeekerClip", sync=True)
     def key_seeker_clip(self):
-        cursor_r = self.get_cursor_pos(self.nvim)[0]
+        cursor_r = self.get_cursor_pos()[0]
         lines = self.nvim.current.buffer[:cursor_r]
-        key = lib.seeker.seek_key(lines, cursor_r - 1)
-        self.clip(self.nvim, key)
+        key = seeker.seek_key(lines, cursor_r - 1)
+        self.clip(key)
         self.nvim.out_write('Clipped: ' + key + '\n')
 
     def get_cursor_pos(self):
