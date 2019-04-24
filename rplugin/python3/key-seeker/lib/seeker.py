@@ -94,7 +94,7 @@ def dig_key(lines: List[str], key: str) -> [int, int, str]:
     splited_key: List[str] = key.split('.')
     current_key_index: int = 0
     row_index: int = -1
-    current_indent: int = 0
+    current_indent: int = -1
     last_hit_row_index: int = -1
 
     for line in lines:
