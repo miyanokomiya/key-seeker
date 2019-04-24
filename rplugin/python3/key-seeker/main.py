@@ -34,6 +34,7 @@ class KeySeeker(object):
         self.nvim.call('cursor', (cursor_r, cursor_c))
 
     def clip(self, text):
+        text = text.replace('"', '\\"')
         self.nvim.command('let @0="{}"'.format(text))
         self.nvim.command('let @"="{}"'.format(text))
         self.nvim.command('let @*="{}"'.format(text))
