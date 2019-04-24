@@ -65,13 +65,3 @@ NG
   "a": "a", "b": ":KeySeekerClip -> Clip 'a'"
 }
 ```
-
-### Keys include ":"
-NG
-```json
-{
-  "a:b": {
-    "c": ":KeySeekerClip -> Clip 'a.c'",
-  }
-}
-```
