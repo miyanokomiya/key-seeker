@@ -10,7 +10,7 @@ python3 & [Pynvim](https://github.com/neovim/pynvim)
 ```toml
 [[plugins]]
 repo = 'miyanokomiya/key-seeker.nvim'
-on_cmd    = ['KeySeekerClip']
+on_cmd    = ['KeySeekerClip', 'KeySeekerDig']
 # optional
 hook_add = '''
 nnoremap <silent> <Space>s :KeySeekerClip<CR>
@@ -39,6 +39,22 @@ yaml
 a:
   b:
     c: ":KeySeekerClip -> Clip 'a.b.c'"
+```
+
+Execute the command to go to the line.
+```
+:KeySeekerDig <key>
+```
+
+json
+```json
+{
+  "a": {
+    "b": {
+      "c": ":KeySeekerDig a.b.c -> go to this line"
+    }
+  }
+}
 ```
 
 ## Limitation
