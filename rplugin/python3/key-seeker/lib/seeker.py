@@ -70,7 +70,7 @@ def seek_key(lines: List[str], index: int) -> str:
     return ret[1:-1]
 
 
-def dig_key(lines: List[str], key: str) -> [int, int]:
+def dig_key(lines: List[str], key: str) -> [int, int, str]:
     """
     キー掘り下げ
 
@@ -87,6 +87,8 @@ def dig_key(lines: List[str], key: str) -> [int, int]:
         該当キーの行、ヒットしなければ最も近い階層の行
     column_index: int
         テキスト開始列
+    hit_key: str
+        ヒットしたキー
     """
 
     splited_key: List[str] = key.split('.')
@@ -117,4 +119,6 @@ def dig_key(lines: List[str], key: str) -> [int, int]:
         if current_key_index == len(splited_key):
             break
 
-    return [last_hit_row_index, current_indent]
+    return [last_hit_row_index,
+            current_indent,
+            '.'.join(splited_key[:current_key_index])]

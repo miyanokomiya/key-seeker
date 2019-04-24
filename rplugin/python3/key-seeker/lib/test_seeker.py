@@ -72,14 +72,14 @@ class TestJsonModule(TestCase):
                      '  "a": "aaa"',
                      '}',
                      ],
-                    'a', [1, 2]),
+                    'a', [1, 2, 'a']),
                 (
                     ['{',
                      '  "a": "aaa"',
                      '  "b": "bbb"',
                      '}',
                      ],
-                    'b', [2, 2]),
+                    'b', [2, 2, 'b']),
                 (
                     ['{',
                      '  "a": "aaa"',
@@ -88,7 +88,7 @@ class TestJsonModule(TestCase):
                      '  }',
                      '}',
                      ],
-                    'b.c', [3, 4]),
+                    'b.c', [3, 4, 'b.c']),
                 (
                     ['{',
                      '  "b": {',
@@ -100,7 +100,7 @@ class TestJsonModule(TestCase):
                      '  "a": "aaa"',
                      '}',
                      ],
-                    'd.f', [5, 4]),
+                    'd.f', [5, 4, 'd.f']),
                 (
                     ['// abcd: abcd',
                      '{',
@@ -114,7 +114,7 @@ class TestJsonModule(TestCase):
                      '  }',
                      '}',
                      ],
-                    'd.g', [8, 4]),
+                    'd.g', [8, 4, 'd.g']),
                 (
                     ['{',
                      '  "a": "a:a:a"',
@@ -124,7 +124,7 @@ class TestJsonModule(TestCase):
                      '  }',
                      '}',
                      ],
-                    'd.h', [2, 2]),
+                    'd.h', [2, 2, 'd']),
                 ]
 
         for lines, key, result in test_patterns:

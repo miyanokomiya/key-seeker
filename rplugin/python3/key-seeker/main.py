@@ -19,8 +19,9 @@ class KeySeeker(object):
     @neovim.command("KeySeekerDig", nargs='1', sync=True)
     def key_seeker_dig(self, args):
         lines = self.nvim.current.buffer[0:]
-        cursor_r, cursor_c = seeker.dig_key(lines, args[0])
-        self.set_cursor_pos(cursor_r, cursor_c)
+        cursor_r, cursor_c, hit_key = seeker.dig_key(lines, args[0])
+        self.set_cursor_pos(cursor_r + 1, cursor_c + 1)
+        self.nvim.out_write('Hit: ' + hit_key + '\n')
 
     def get_cursor_pos(self):
         cursor_r, cursor_c = self.nvim.eval('getpos(".")[1:2]')
