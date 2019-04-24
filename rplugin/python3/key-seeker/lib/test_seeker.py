@@ -8,9 +8,9 @@ class TestJsonModule(TestCase):
     def test_get_key(self):
         test_patterns = [
                 ('"abc": "def"', 'abc'),
-                ('"ab\\"c": "def"', 'ab\\"c'),
+                ('"ab\\"c": "def"', 'ab"c'),
                 ("'abc': 'def'", 'abc'),
-                ("'a\\'bc': 'def'", "a\\'bc"),
+                ("'a\\'bc': 'def'", "a'bc"),
                 ("'ab:c': 'def'", 'ab:c'),
                 ("abc: def", 'abc'),
                 ("abc  : def", 'abc'),

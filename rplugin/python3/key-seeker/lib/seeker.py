@@ -52,11 +52,11 @@ def get_key(line: str) -> str:
 
     matched = re.match(reg_dq, stripped)
     if matched:
-        return matched.group()[:-1].strip()[1:-1]
+        return matched.group()[:-1].strip()[1:-1].replace('\\"', '"')
 
     matched = re.match(reg_sq, stripped)
     if matched:
-        return matched.group()[:-1].strip()[1:-1]
+        return matched.group()[:-1].strip()[1:-1].replace("\\'", "'")
 
     matched = re.match(reg_nq, stripped)
     if matched:
