@@ -1,4 +1,5 @@
 from typing import List
+import re
 
 
 def valid_line(line: str) -> bool:
@@ -29,6 +30,41 @@ def valid_line(line: str) -> bool:
     return True
 
 
+def get_key(line: str) -> str:
+    """
+    キー取得
+
+    Parameters
+    ----------
+    line: str
+        行テキスト
+
+    Returns
+    -------
+    key: str
+        キー
+    """
+
+    reg_dq = r'"(.*?)(?<!\\)" *:'
+    reg_sq = r"'(.*?)(?<!\\)' *:"
+    reg_nq = r"(.*?) *:"
+    stripped = line.strip()
+
+    matched = re.match(reg_dq, stripped)
+    if matched:
+        return matched.group()[:-1].strip()[1:-1]
+
+    matched = re.match(reg_sq, stripped)
+    if matched:
+        return matched.group()[:-1].strip()[1:-1]
+
+    matched = re.match(reg_nq, stripped)
+    if matched:
+        return matched.group()[:-1].strip()
+
+    return ''
+
+
 def seek_key(lines: List[str], index: int) -> str:
     """
     キー階層シーク
@@ -57,11 +93,11 @@ def seek_key(lines: List[str], index: int) -> str:
         if indent >= current_indent:
             continue
 
-        splited = line.split(':')
-        if len(splited) <= 1:
+        current_key = get_key(line)
+        if not current_key:
             continue
 
-        ret = '.' + splited[0].strip().replace("'", '').replace('"', '') + ret
+        ret = '.' + current_key + ret
         current_indent = indent
         if current_indent == 0:
             break
@@ -106,11 +142,10 @@ def dig_key(lines: List[str], key: str) -> [int, int, str]:
         if indent <= current_indent:
             continue
 
-        splited = line.split(':')
-        if len(splited) <= 1:
+        current_key = get_key(line)
+        if not current_key:
             continue
 
-        current_key = splited[0].strip().replace("'", '').replace('"', '')
         if current_key == splited_key[current_key_index]:
             current_key_index += 1
             current_indent = indent

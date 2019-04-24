@@ -5,10 +5,31 @@ from . import seeker
 class TestJsonModule(TestCase):
     """ seekerテスト """
 
-    def test_seek_key(self):
-        """ seek_keyのテスト """
-
+    def test_get_key(self):
         test_patterns = [
+                ('"abc": "def"', 'abc'),
+                ('"ab\\"c": "def"', 'ab\\"c'),
+                ("'abc': 'def'", 'abc'),
+                ("'a\\'bc': 'def'", "a\\'bc"),
+                ("'ab:c': 'def'", 'ab:c'),
+                ("abc: def", 'abc'),
+                ("abc  : def", 'abc'),
+                ('"abc"  : "def"', 'abc'),
+                ('"abc"', ''),
+                ]
+
+        for line, result in test_patterns:
+            with self.subTest(line=line, result=result):
+                self.assertEqual(seeker.get_key(line), result)
+
+    def test_seek_key(self):
+        test_patterns = [
+                (
+                    ['a:',
+                     '  b: bbb',
+                     'c: ccc',
+                     ],
+                    1, 'a.b'),
                 (
                     ['{',
                      '  "a": "aaa"',
@@ -67,6 +88,12 @@ class TestJsonModule(TestCase):
         """ dig_keyのテスト """
 
         test_patterns = [
+                (
+                    ['a:',
+                     '  b: bbb',
+                     'c: ccc',
+                     ],
+                    'a.b', [1, 2, 'a.b']),
                 (
                     ['{',
                      '  "a": "aaa"',
