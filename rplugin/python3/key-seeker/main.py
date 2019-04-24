@@ -20,8 +20,11 @@ class KeySeeker(object):
     def key_seeker_dig(self, args):
         lines = self.nvim.current.buffer[0:]
         cursor_r, cursor_c, hit_key = seeker.dig_key(lines, args[0])
-        self.set_cursor_pos(cursor_r + 1, cursor_c + 1)
-        self.nvim.out_write('Hit: ' + hit_key + '\n')
+        if hit_key:
+            self.set_cursor_pos(cursor_r + 1, cursor_c + 1)
+            self.nvim.out_write('Hit: ' + hit_key + '\n')
+        else:
+            self.nvim.out_write('Not found: ' + args[0] + '\n')
 
     def get_cursor_pos(self):
         cursor_r, cursor_c = self.nvim.eval('getpos(".")[1:2]')

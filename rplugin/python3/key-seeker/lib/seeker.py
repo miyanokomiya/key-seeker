@@ -88,7 +88,7 @@ def dig_key(lines: List[str], key: str) -> [int, int, str]:
     column_index: int
         テキスト開始列
     hit_key: str
-        ヒットしたキー
+        ヒットしたキー、対象なしなら空文字
     """
 
     splited_key: List[str] = key.split('.')

@@ -136,6 +136,9 @@ class TestJsonModule(TestCase):
                      '}',
                      ],
                     'd.f', [2, 2, 'd.f']),
+                (
+                    ['a: aaa'],
+                    'b', [-1, -1, '']),
                 ]
 
         for lines, key, result in test_patterns:
